@@ -3,6 +3,7 @@ div{
     
 }
 .screen{grid-area: screen;}
+.keyboard{grid-area:keyboard;}
 .un     {grid-area:un;}
 .deux   {grid-area:deux;}
 .trois  {grid-area:trois;}
@@ -15,8 +16,20 @@ div{
 .zero   {grid-area:zero;}
 .dot    {grid-area:dot;}
 
+.calculator{
+    display: grid;
+    background-color: grey;
+    grid-template-areas: 
+    'screen'
+    'keyboard'
+    'keyboard';
+}
+
+.screen{
+    height: 100px;
+}
+
 .keyboard{
-    
     display:grid;
     background-color: blue;
     grid-template-areas: 'sept huit neuf'
