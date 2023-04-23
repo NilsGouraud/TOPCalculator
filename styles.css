@@ -1,0 +1,32 @@
+div{
+    border:red 1px solid;
+    
+}
+.screen{grid-area: screen;}
+.un     {grid-area:un;}
+.deux   {grid-area:deux;}
+.trois  {grid-area:trois;}
+.quatre {grid-area:quatre;}
+.cinq   {grid-area:cinq;}
+.six    {grid-area:six;}
+.sept   {grid-area:sept;}
+.huit   {grid-area:huit;}
+.neuf   {grid-area:neuf;}
+.zero   {grid-area:zero;}
+.dot    {grid-area:dot;}
+
+.keyboard{
+    
+    display:grid;
+    background-color: blue;
+    grid-template-areas: 'sept huit neuf'
+    'quatre cinq six'
+    'un deux trois'
+    'zero zero dot'
+}
+.keyboard>div{
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+}
