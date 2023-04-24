@@ -1,87 +1,130 @@
 
 
-const availableOperators=['+','-','*','/'];
-const temp=document.querySelector('.temp');
-const stored=document.querySelector('.stored')
-let numberOne='';
-let numberTwo='';
-let operator=''
+const availableOperators = ['+', '-', '*', '/', '='];
+const temp = document.querySelector('.temp');
+const stored = document.querySelector('.stored')
+let numberOne = '';
+let numberTwo = '';
+let operator = '';
 
 console.log("test");
 
 
-console.log(operate(numberOne,operator,numberTwo));
+console.log(operate(numberOne, operator, numberTwo));
 
 
-window.addEventListener('keydown',function(e){
-    const digit=document.querySelector(`div[data-key="${e.key}"]`);
-    
-    //console.log(e);
-    digit.classList.add('pressed');
-    
+window.addEventListener('keydown', function (e) {
+    const input = document.querySelector(`div[data-key="${e.key}"]`);
+    input.classList.add('pressed');
+    console.log(e)
     
     
-    if(digit.innerHTML=="="){
-        temp.textContent=operate(numberOne,operator,numberTwo);
+    
+    //if the input is 'clear', the calculator is reset
+    if (input.innerHTML == "clear") {
+        temp.textContent = "";
+        stored.textContent = "";
+        numberOne = '';
+        numberTwo = '';
+        operator = '';
     }
     
-    if(!availableOperators.includes(digit.innerHTML)){
-        if(digit.innerHTML!="="){
-            temp.textContent+=digit.innerHTML;
-        }
-    }
     
     
-    
-    if(availableOperators.includes(digit.innerHTML)){
-        if(operator==''){
-            operator=digit.innerHTML;
-            numberOne=temp.textContent;
-            stored.textContent=numberOne+operator;
-            temp.textContent="";
-            
-            
-        }else{
-            numberTwo=temp.textContent;
-            temp.textContent=operate(numberOne,operator,numberTwo);
-        }
+    //the screen will be filled with any figures
+    if (input.classList.contains('figure')) {
+        if(numberOne!='') temp.textContent='';
+        //replacing the first number firsthand
+        temp.textContent += input.innerHTML;
         
     }
     
-});
-window.addEventListener('keyup',function(e){
-    const digit=document.querySelector(`div[data-key="${e.key}"]`);
-    digit.classList.remove('pressed');
     
+    
+    //if the input is an operator
+    if (availableOperators.includes(input.innerHTML)) {
+        
+
+        if(input.innerHTML!='=' && operator==''){
+            operator = input.innerHTML;
+        }
+        
+        
+        //if the first number wasn't taken into account
+        if (numberOne=='') {
+            numberOne = temp.textContent;
+            if (temp.textContent == '') {
+                numberOne = 0;
+            }
+            stored.textContent += numberOne
+            temp.textContent = '';
+            console.log(numberOne)
+        } 
+        
+        
+        
+        numberTwo = temp.textContent;
+        stored.textContent += numberTwo;
+        temp.textContent = operate(numberOne, operator, numberTwo);
+        numberTwo='';
+        numberOne = temp.textContent
+
+        //the operator is stored
+        if(input.innerHTML!='='){
+            operator = input.innerHTML;
+            stored.textContent+=operator;
+        }
+        
+
+    }
+    
+    
+    
+});
+window.addEventListener('keyup', function (e) {
+    const input = document.querySelector(`div[data-key="${e.key}"]`);
+    input.classList.remove('pressed');
     
 });
 
-function add(numberOne, numberTwo){
-    return numberOne+numberTwo;
+function add(numberOne, numberTwo) {
+    return numberOne + numberTwo;
 }
-function multiply(numberOne, numberTwo){
-    return numberOne*numberTwo;
+function multiply(numberOne, numberTwo) {
+    return numberOne * numberTwo;
 }
-function substract(numberOne, numberTwo){
-    return numberOne-numberTwo;
+function substract(numberOne, numberTwo) {
+    return numberOne - numberTwo;
 }
-function divide(numberOne, numberTwo){
-    return numberOne/numberTwo;
+function divide(numberOne, numberTwo) {
+    return numberOne / numberTwo;
 }
-function power(numberOne, numberTwo){
-    return Math.pow(numberOne,numberTwo)
+function power(numberOne, numberTwo) {
+    return Math.pow(numberOne, numberTwo)
 }
 
-function operate(numberOne,operator,numberTwo){
-    switch (operator){
+function operate(numberOne, operator, numberTwo) {
+    
+    //the strings are converted to numerical values
+    numberOne *= 1;
+    numberTwo *= 1;
+    
+    
+    if (numberOne == '' || undefined) {
+        return numberTwo;
+    }
+    if (numberTwo == '' && operator == '') {
+        return 0;
+    }
+    switch (operator) {
         case '*':
-        return multiply(numberOne,numberTwo);
+        return multiply(numberOne, numberTwo);
         case '/':
-        return divide(numberOne,numberTwo);
+        return divide(numberOne, numberTwo);
         case '+':
-        return add(numberOne,numberTwo);    
+        return add(numberOne, numberTwo);
         case '-':
-        return substract(numberOne,numberTwo);   
+        return substract(numberOne, numberTwo);
         default:
         return ("invalid")
     }

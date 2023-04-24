@@ -20,7 +20,7 @@ div{
 .minus  {grid-area: minus;}
 .enter  {grid-area: enter;}
 .multiply{grid-area: multiply;}
-.verrnum{grid-area:verrnum;}
+.backspace{grid-area:backspace;}
 
 .calculator{
     display: grid;
@@ -48,7 +48,7 @@ div{
     display:grid;
     background-color: rgb(2, 2, 88);
     grid-template-areas:
-    'verrnum divide multiply minus'
+    'backspace divide multiply minus'
     'sept huit neuf plus'
     'quatre cinq six plus'
     'un deux trois enter'
