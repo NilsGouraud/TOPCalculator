@@ -1,7 +1,8 @@
 div{
     
 }
-.screen{grid-area: screen;}
+.temp{grid-area: temp;}
+.stored{grid-area:stored;}
 .keyboard{grid-area:keyboard;}
 .un     {grid-area:un;}
 .deux   {grid-area:deux;}
@@ -24,19 +25,23 @@ div{
 .calculator{
     display: grid;
     background-color: grey;
-    grid-template-areas: 
-    'screen'
+    grid-template-areas:
+    'stored'
+    'temp'
+
     'keyboard'
-    'keyboard';
+;
     width: 500px;
 }
 
-.screen{
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.temp{
+    height: 150px;
     font-size: 50px;
+    background-color: rgb(190, 190, 190);
+
+}
+.stored{
+    height: 150px;
 }
 
 .keyboard{
