@@ -2,10 +2,12 @@
 
 const availableOperators = ['+', '-', '*', '/', '='];
 const temp = document.querySelector('.temp');
-const stored = document.querySelector('.stored')
-let numberOne = '';
-let numberTwo = '';
-let operator = '';
+const stored = document.querySelector('.stored');
+stored.innerHTML="test";
+
+let numberOne = "";
+let numberTwo = "";
+let operator = "";
 
 console.log("test");
 
@@ -21,11 +23,11 @@ window.addEventListener('keydown', function (e) {
     function clear(){
         temp.textContent = "";
         stored.textContent = "";
-        numberOne = '';
-        numberTwo = '';
-        operator = '';
+        numberOne = "";
+        numberTwo = "";
+        operator = "";
     }
-
+    
     //if the input is 'clear', the calculator is reset
     if (input.innerHTML == "clear") {
         clear();
@@ -36,8 +38,9 @@ window.addEventListener('keydown', function (e) {
             //if the last operator used was =, the calculator is reset
             clear();
         }
-        if(numberOne!='') temp.textContent="";
-        //replacing the first number firsthand
+
+
+        if( numberOne!="" && temp.textContent==numberOne ) temp.textContent="";
         temp.textContent += input.innerHTML;
         
     }
@@ -47,37 +50,38 @@ window.addEventListener('keydown', function (e) {
     //if the input is an operator
     if (availableOperators.includes(input.innerHTML)) {
         
-
-        if(input.innerHTML!='=' && operator==''){
+        
+        if(input.innerHTML!="=" && operator==""){
             operator = input.innerHTML;
         }
         
         
         //if the first number wasn't taken into account
-        if (numberOne=='') {
+        if (numberOne=="") {
             numberOne = temp.textContent;
             if (temp.textContent == "") {
                 numberOne = 0;
             }
             stored.textContent += numberOne
-            temp.textContent = '';
+            temp.textContent = "";
             console.log(numberOne)
-        } 
+        }      
         
-        
-        
+        else{
+
         numberTwo = temp.textContent;
         stored.textContent += numberTwo;
         temp.textContent = operate(numberOne, operator, numberTwo);
         numberTwo="";
         numberOne = temp.textContent
+        }
 
-        if(input.innerHTML!='='){
+        if(input.innerHTML!="="){
             stored.textContent+=operator;
         }
         operator = input.innerHTML;
-
-
+        
+        
     }
     
     
@@ -112,10 +116,10 @@ function operate(numberOne, operator, numberTwo) {
     numberTwo *= 1;
     
     
-    if (numberOne == '' || undefined) {
+    if (numberOne == "" || undefined) {
         return numberTwo;
     }
-    if (numberTwo == '' && operator == '') {
+    if (numberTwo == "" && operator == "") {
         return 0;
     }
     switch (operator) {
