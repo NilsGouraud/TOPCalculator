@@ -1,9 +1,7 @@
-
-
 const availableOperators = ['+', '-', '*', '/', '='];
 const temp = document.querySelector('.temp');
 const stored = document.querySelector('.stored');
-stored.innerHTML="test";
+stored.innerHTML="";
 
 let numberOne = "";
 let numberTwo = "";
@@ -54,7 +52,10 @@ window.addEventListener('keydown', function (e) {
         if(input.innerHTML!="=" && operator==""){
             operator = input.innerHTML;
         }
-        
+        if(operator=='=' && input.innerHTML=='='){
+            //if the last operator used was =, the calculator is reset
+            clear();
+        }
         
         //if the first number wasn't taken into account
         if (numberOne=="") {
