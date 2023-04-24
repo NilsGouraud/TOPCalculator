@@ -10,30 +10,33 @@ let operator = '';
 console.log("test");
 
 
-console.log(operate(numberOne, operator, numberTwo));
 
 
 window.addEventListener('keydown', function (e) {
     const input = document.querySelector(`div[data-key="${e.key}"]`);
     input.classList.add('pressed');
-    console.log(e)
     
     
     
-    //if the input is 'clear', the calculator is reset
-    if (input.innerHTML == "clear") {
+    function clear(){
         temp.textContent = "";
         stored.textContent = "";
         numberOne = '';
         numberTwo = '';
         operator = '';
     }
+
+    //if the input is 'clear', the calculator is reset
+    if (input.innerHTML == "clear") {
+        clear();
+    }
     
-    
-    
-    //the screen will be filled with any figures
     if (input.classList.contains('figure')) {
-        if(numberOne!='') temp.textContent='';
+        if(operator=='='){
+            //if the last operator used was =, the calculator is reset
+            clear();
+        }
+        if(numberOne!='') temp.textContent="";
         //replacing the first number firsthand
         temp.textContent += input.innerHTML;
         
@@ -53,7 +56,7 @@ window.addEventListener('keydown', function (e) {
         //if the first number wasn't taken into account
         if (numberOne=='') {
             numberOne = temp.textContent;
-            if (temp.textContent == '') {
+            if (temp.textContent == "") {
                 numberOne = 0;
             }
             stored.textContent += numberOne
@@ -66,15 +69,14 @@ window.addEventListener('keydown', function (e) {
         numberTwo = temp.textContent;
         stored.textContent += numberTwo;
         temp.textContent = operate(numberOne, operator, numberTwo);
-        numberTwo='';
+        numberTwo="";
         numberOne = temp.textContent
 
-        //the operator is stored
         if(input.innerHTML!='='){
-            operator = input.innerHTML;
             stored.textContent+=operator;
         }
-        
+        operator = input.innerHTML;
+
 
     }
     
