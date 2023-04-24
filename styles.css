@@ -1,5 +1,4 @@
 div{
-    border:red 1px solid;
     
 }
 .screen{grid-area: screen;}
@@ -15,6 +14,12 @@ div{
 .neuf   {grid-area:neuf;}
 .zero   {grid-area:zero;}
 .dot    {grid-area:dot;}
+.divide {grid-area: divide;}
+.plus   {grid-area: plus;}
+.minus  {grid-area: minus;}
+.enter  {grid-area: enter;}
+.multiply{grid-area: multiply;}
+.verrnum{grid-area:verrnum;}
 
 .calculator{
     display: grid;
@@ -23,23 +28,47 @@ div{
     'screen'
     'keyboard'
     'keyboard';
+    width: 500px;
 }
 
 .screen{
     height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
 }
 
 .keyboard{
     display:grid;
-    background-color: blue;
-    grid-template-areas: 'sept huit neuf'
-    'quatre cinq six'
-    'un deux trois'
-    'zero zero dot'
+    background-color: rgb(2, 2, 88);
+    grid-template-areas:
+    'verrnum divide multiply minus'
+    'sept huit neuf plus'
+    'quatre cinq six plus'
+    'un deux trois enter'
+    'zero zero dot enter';
+    grid-template-columns: 100px;
+    grid-template-rows: 100px 100px 100px 100px 100px;
+
+    gap:2px;
+    padding: 2px;
+    
 }
 .keyboard>div{
     display: flex;
-    height: 100px;
+
     justify-content: center;
     align-items: center;
+    border-radius: 2%;
+    
+}
+
+.input{
+    background-color: rgb(51, 166, 211);
+
+}
+
+.pressed{
+    background-color: rgb(65, 201, 255);
 }
