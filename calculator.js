@@ -15,7 +15,7 @@ window.addEventListener("click", function (e) {
 });
 
 window.addEventListener("keydown", function (e) {
-    const input = document.querySelector(`div[data-key="${e.key}"]`);
+    const input = document.querySelector(`button[data-key="${e.key}"]`);
     input.classList.add('pressed');
     
     
@@ -90,7 +90,7 @@ window.addEventListener("keydown", function (e) {
     
 });
 window.addEventListener('keyup', function (e) {
-    const input = document.querySelector(`div[data-key="${e.key}"]`);
+    const input = document.querySelector(`button[data-key="${e.key}"]`);
     input.classList.remove('pressed');
     
 });
@@ -118,9 +118,6 @@ function operate(numberOne, operator, numberTwo) {
     numberTwo *= 1;
     
     
-    if (numberOne == "" || undefined) {
-        return numberTwo;
-    }
     if (numberTwo == "" && operator == "") {
         return 0;
     }
