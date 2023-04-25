@@ -10,9 +10,11 @@ let operator = "";
 console.log("test");
 
 
+window.addEventListener("click", function (e) {
+    console.log(e);
+});
 
-
-window.addEventListener('keydown', function (e) {
+window.addEventListener("keydown", function (e) {
     const input = document.querySelector(`div[data-key="${e.key}"]`);
     input.classList.add('pressed');
     
@@ -65,7 +67,6 @@ window.addEventListener('keydown', function (e) {
             }
             stored.textContent += numberOne
             temp.textContent = "";
-            console.log(numberOne)
         }      
         
         else{
