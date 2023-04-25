@@ -75,13 +75,13 @@ window.addEventListener("keydown", function (e) {
         stored.textContent += numberTwo;
         temp.textContent = operate(numberOne, operator, numberTwo);
         numberTwo="";
-        numberOne = temp.textContent
+        numberOne = temp.textContent;
         }
 
+        operator = input.innerHTML;
         if(input.innerHTML!="="){
             stored.textContent+=operator;
         }
-        operator = input.innerHTML;
         
         
     }
@@ -118,6 +118,7 @@ function operate(numberOne, operator, numberTwo) {
     numberTwo *= 1;
     
     
+
     if (numberTwo == "" && operator == "") {
         return 0;
     }
@@ -131,7 +132,7 @@ function operate(numberOne, operator, numberTwo) {
         case '-':
         return substract(numberOne, numberTwo);
         default:
-        return ("invalid")
+        return ("invalid");
     }
 }
 
