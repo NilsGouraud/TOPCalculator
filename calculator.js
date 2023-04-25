@@ -1,6 +1,7 @@
 const availableOperators = ['+', '-', '*', '/', '='];
 const temp = document.querySelector('.temp');
 const stored = document.querySelector('.stored');
+const buttons = document.querySelectorAll('button');
 stored.innerHTML="";
 
 let numberOne = "";
@@ -9,12 +10,86 @@ let operator = "";
 
 console.log("test");
 
+buttons.forEach(button=>button.addEventListener("click", function (e) {
+    const input = this;
+    input.classList.add('pressed');
+    
+    
+    
+    function clear(){
+        temp.textContent = "";
+        stored.textContent = "";
+        numberOne = "";
+        numberTwo = "";
+        operator = "";
+    }
+    
+    //if the input is 'clear', the calculator is reset
+    if (input.innerHTML == "clear") {
+        clear();
+    }
+    
+    if (input.classList.contains('figure')) {
+        if(operator=='='){
+            //if the last operator used was =, the calculator is reset
+            clear();
+        }
 
-window.addEventListener("click", function (e) {
-    console.log(e);
-});
 
-window.addEventListener("keydown", function (e) {
+        if( numberOne!="" && temp.textContent==numberOne ) temp.textContent="";
+        temp.textContent += input.innerHTML;
+        
+    }
+    
+    
+    
+    //if the input is an operator
+    if (availableOperators.includes(input.innerHTML)) {
+        
+        
+        if(input.innerHTML!="=" && operator==""){
+            operator = input.innerHTML;
+        }
+        if(operator=='=' && input.innerHTML=='='){
+            //if the last operator used was =, the calculator is reset
+            clear();
+        }
+        
+        //if the first number wasn't taken into account
+        if (numberOne=="") {
+            numberOne = temp.textContent;
+            if (temp.textContent == "") {
+                numberOne = 0;
+            }
+            stored.textContent += numberOne
+            temp.textContent = "";
+        }      
+        
+        else{
+
+        numberTwo = temp.textContent;
+        stored.textContent += numberTwo;
+        temp.textContent = operate(numberOne, operator, numberTwo);
+        numberTwo="";
+        numberOne = temp.textContent;
+        }
+
+        operator = input.innerHTML;
+        if(input.innerHTML!="="){
+            stored.textContent+=operator;
+        }
+        
+        
+    }
+    
+    
+    
+}));
+
+
+
+window.addEventListener("keydown", 
+function (e) {
     const input = document.querySelector(`button[data-key="${e.key}"]`);
     input.classList.add('pressed');
     
@@ -89,6 +164,8 @@ window.addEventListener("keydown", function (e) {
     
     
 });
+
+
 window.addEventListener('keyup', function (e) {
     const input = document.querySelector(`button[data-key="${e.key}"]`);
     input.classList.remove('pressed');
