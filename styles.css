@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'ibm_plex_monoregular';
     src: url('./fonts/ibmplexmono-regular-webfont.woff2') format('woff2'),
-         url('./fonts/ibmplexmono-regular-webfont.woff') format('woff');
+    url('./fonts/ibmplexmono-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-
+    
 }
 body{
     font-family: 'ibm_plex_monoregular';
@@ -33,53 +33,47 @@ body{
 
 .calculator{
     border-radius: 1%;
-    padding: 1%;
+    padding: 2%;
     border: 1px solid black;
     display: grid;
-    background-color: grey;
+    background-color: rgb(161, 161, 161);
     grid-template-areas:
     'stored'
     'temp'
     'keyboard'
-;
-    width: 500px;
+    ;
+    
 }
 
 
 .temp, .stored{
     width: inherit;
-    border: 4px solid grey;
+    border: 3px solid grey;
     line-height: 1;
     overflow: visible;
     overflow-wrap: break-word;
-
+    
 }
 
 
 .stored{
-    height: 100px;
     font-size: 300%;
     background-color: rgb(105, 133, 117);
 }
 .temp{
-    height: 150px;
     font-size: 500%;
     background-color: rgb(146, 204, 171);
 }
 
 .keyboard{
     display:grid;
-    background-color: rgb(2, 2, 88);
     grid-template-areas:
     'backspace divide multiply minus'
     'sept huit neuf plus'
     'quatre cinq six plus'
     'un deux trois enter'
     'zero zero dot enter';
-    grid-template-columns: 100px;
-    grid-template-rows: 100px 100px 100px 100px 100px;
-
-    gap:2px;
+    
     padding: 2px;
     
 }
@@ -90,14 +84,62 @@ body{
     align-items: center;
     border-radius: 2%;
     font-size: 225%;
-
 }
 
-.input{
-    background-color: rgb(51, 166, 211);
+.figure{
+    background-color: rgb(35, 117, 150);
+    color: black;
+        color: white;
+}
 
+.operator{
+    background-color: rgb(42, 137, 175);
+        color: white;
 }
 
 .pressed{
     background-color: rgb(65, 201, 255);
+    color: black;
+}
+
+
+@media screen and (max-width: 800px){
+    
+    .calculator{
+        width: 250px;
+    }
+    .stored{
+        height: 50px;
+        font-size: 150%;
+    }
+    .temp{
+        height: 75px;
+        font-size: 225%;
+    }
+    .keyboard{
+        grid-template-columns: 50px;
+        grid-template-rows: 50px 50px 50px 50px 50px;
+        gap:5px;
+        font-size:60%;
+    }
+
+}
+
+@media screen and (min-width: 800px){
+    .calculator{
+        width: 500px;
+    }
+    .stored{
+        height: 100px;
+    }
+    .temp{
+        height: 150px;
+    }
+    
+    .keyboard{
+        grid-template-columns: 100px;
+        grid-template-rows: 100px 100px 100px 100px 100px;
+        
+        gap:5px;
+    }
 }
