@@ -4,16 +4,11 @@ const stored = document.querySelector('.stored');
 const buttons = document.querySelectorAll('button');
 stored.innerHTML="";
 
-const affichageUn=document.querySelector('.numberOne');
-const affichageDeux=document.querySelector('.numberTwo');
-
-
 
 let numberOne = 0;
 let numberTwo = 0;
 let operator = "+";
-let started=false;
-
+let wait=false;
 
 
 console.log("test");
@@ -59,52 +54,57 @@ function calculator(input){
     if (input.innerHTML == "clear") {
         clear();
     }
+
+    //if the last operation was concluded, the calculator is reset
+    if (operator=='=') {
+        if (input.classList.contains('figure')||input.innerHTML=='=') clear();
+    }
+
+    //if the previous operation failed, the calculator is reset
+    if(temp.textContent=="impossible"||temp.textContent=="NaN"){
+        clear();
+    }
+    
+    
+    
+    
     
     if (input.classList.contains('figure')) {
-        if(operator=='='){
-            //if the last operator used was =, the calculator is reset
-            clear();
-        }
-        
-        if(temp.textContent==numberOne ) temp.textContent="";
-        
+        if(wait==true) temp.textContent="";
+        wait=false;
         temp.textContent += input.innerHTML;
-        
     }
     
     
     
     //if the input is an operator
     if (availableOperators.includes(input.innerHTML)) {
-
-                //if the first number wasn't taken into account
-            if(started==false){
-                stored.textContent += numberOne;
-                started=true
-
-            }
-
-            if(operator!='='){
+        
+        //if the user hasn't entered any number before the operator
+        if(temp.textContent==""){
+            stored.textContent += numberOne;
+        }
+        
+        if(operator!='=' && wait==false){
             numberTwo = temp.textContent;
             stored.textContent += numberTwo;
             temp.textContent = operate(numberOne, operator, numberTwo);
-            numberTwo="";
+            numberTwo=0;
             numberOne = temp.textContent;
-            }
-        
-        
-        if(operator=='=' && input.innerHTML=='='){
-            //if the last operator used was =, the calculator is reset
-            clear();
+            
         }
-        
         
         
         operator = input.innerHTML;
-        if(input.innerHTML!="="){
+        
+        if(input.innerHTML!="=" && wait==false){
             stored.textContent+=operator;
         }
+        wait=true;
         
+        if(operator=='='){
+            wait=false;
+        }
         
     }
     
@@ -123,6 +123,9 @@ function substract(numberOne, numberTwo) {
     return numberOne - numberTwo;
 }
 function divide(numberOne, numberTwo) {
+    if(numberTwo==0){
+        return "impossible";
+    }
     return numberOne / numberTwo;
 }
 function power(numberOne, numberTwo) {
@@ -133,7 +136,7 @@ function clear(){
     temp.textContent = "";
     stored.textContent = "";
     numberOne = 0;
-    numberTwo = "";
+    numberTwo = 0;
     operator = "+";
 }
 
@@ -144,9 +147,6 @@ function operate(numberOne, operator, numberTwo) {
     numberTwo *= 1;
     
     
-    if (numberTwo == "") {
-        return numberOne;
-    }
     switch (operator) {
         case '*':
         return multiply(numberOne, numberTwo);
