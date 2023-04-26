@@ -10,9 +10,9 @@ const affichageDeux=document.querySelector('.numberTwo');
 
 
 let numberOne = 0;
-let numberTwo = "";
-let operator = "";
-
+let numberTwo = 0;
+let operator = "+";
+let started=false;
 
 
 
@@ -76,32 +76,28 @@ function calculator(input){
     
     //if the input is an operator
     if (availableOperators.includes(input.innerHTML)) {
-        if (numberOne=="") {
-            numberOne = temp.textContent;
-            if (temp.textContent == "") {
-                numberOne = 0;
+
+                //if the first number wasn't taken into account
+            if(started==false){
+                stored.textContent += numberOne;
+                started=true
+
             }
-            stored.textContent += numberOne
-            temp.textContent = "";
-        }      
-        else{
-            
+
+            if(operator!='='){
             numberTwo = temp.textContent;
             stored.textContent += numberTwo;
             temp.textContent = operate(numberOne, operator, numberTwo);
             numberTwo="";
             numberOne = temp.textContent;
-        }
+            }
         
-        if(input.innerHTML!="="){
-            operator = input.innerHTML;
-        }
+        
         if(operator=='=' && input.innerHTML=='='){
             //if the last operator used was =, the calculator is reset
             clear();
         }
         
-        //if the first number wasn't taken into account
         
         
         operator = input.innerHTML;
@@ -136,9 +132,9 @@ function power(numberOne, numberTwo) {
 function clear(){
     temp.textContent = "";
     stored.textContent = "";
-    numberOne = "";
+    numberOne = 0;
     numberTwo = "";
-    operator = "";
+    operator = "+";
 }
 
 function operate(numberOne, operator, numberTwo) {
