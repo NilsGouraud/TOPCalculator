@@ -8,6 +8,7 @@
 }
 body{
     font-family: 'ibm_plex_monoregular';
+    background-image: url(textures/oak-3275-mm-architextures.jpg);
 }
 
 .temp{grid-area: temp;}
@@ -37,6 +38,7 @@ body{
     border: 1px solid black;
     display: grid;
     background-color: rgb(161, 161, 161);
+    background-image: url(textures/stainless-steel-2500-mm-architextures.jpg);
     grid-template-areas:
     'stored'
     'temp'
